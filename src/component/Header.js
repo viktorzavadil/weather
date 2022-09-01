@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, LinearProgress, Toolbar, Typography } from "@mui/material";
 import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
 import "./Header.scss";
 
@@ -12,5 +12,6 @@ export default function Header(props) {
                     Actual Weather
                 </Typography>
             </Toolbar>
+            {props.loading ? <LinearProgress /> : <span className="loading-spacer">&nbsp;</span> }
         </AppBar>)
 }

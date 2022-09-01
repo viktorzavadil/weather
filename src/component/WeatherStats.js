@@ -5,9 +5,10 @@ import "./WeatherStats.scss";
 import openWeatherService from "../service/open-weather-service";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
-const DEGREES_STEP = 22.5;
 
 class WeatherStats extends React.Component {
+
+    DEGREES_STEP = 22.5;
 
     render() {
         const { name, weather, sys: { sunrise, sunset }, wind, main, visibility } = this.props.weatherData;
@@ -21,14 +22,15 @@ class WeatherStats extends React.Component {
             { title: "Sunrise", value: `${this.toDate(sunrise)}` },
             { title: "Sunset", value: `${this.toDate(sunset)}` },
         ];
+        const { className = "" } = this.props;
         return (
-            <TableContainer component={Paper} className="weather-stats">
+            <TableContainer component={Paper} className={"weather-stats " + className}>
                 <Table aria-label="weather statistics">
                     <TableHead>
                         <TableRow>
                             <TableCell>{name}</TableCell>
                             <TableCell>
-                                <img alt="weather image" className="image"
+                                <img alt="weather situation" className="image"
                                      src={openWeatherService.getIconUrl(primaryWeather.icon)}/>
                                 <span>{main.temp} °C ({main.feels_like} °C pocit.)</span></TableCell>
                         </TableRow>
@@ -36,7 +38,7 @@ class WeatherStats extends React.Component {
                     <TableBody>
                         {weatherItems.map((item) => {
                             return (<TableRow key={item.title}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                 <TableCell component="th" scope="row">
                                     {item.title}
                                 </TableCell>
@@ -54,7 +56,7 @@ class WeatherStats extends React.Component {
     }
 
     windDirectionEmoji(val) {
-        return "⬇↙↙⬅⬅↖↖⬆⬆↗↗➡➡↘↘⬇".charAt(Math.floor(val / 22.5));
+        return "⬇↙↙⬅⬅↖↖⬆⬆↗↗➡➡↘↘⬇".charAt(Math.floor(val / this.DEGREES_STEP));
     }
 }
 

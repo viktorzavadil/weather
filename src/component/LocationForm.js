@@ -25,15 +25,6 @@ export default class LocationForm extends React.Component {
         this.setState({ city: event.target.value });
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.city !== this.props.city) {
-            console.debug(`[${LocationForm.name}] Props changed, state will be changed`, this.props);
-            this.setState({
-                city: this.props.city
-            });
-        }
-    }
-
     render() {
         const { city } = this.state;
         return (
@@ -42,7 +33,7 @@ export default class LocationForm extends React.Component {
                     <TextField variant="standard" size="small"
                                className="city-field"
                                label="City" type="text" value={city} name="city" onChange={this.setCity}/>
-                    <Button variant="contained" className="submit-button" type="submit">Locate it!</Button>
+                    <Button variant="contained" className="submit-button" type="submit">Load weather</Button>
                 </form>
             </section>
         );
