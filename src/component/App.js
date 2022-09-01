@@ -19,7 +19,6 @@ class App extends React.Component {
 
     render() {
         const { loading } = this.state;
-        console.log("Render App", loading)
         return (
             <div className="App">
                 <Header loading={loading}></Header>
